@@ -1,0 +1,15 @@
+{
+  "name": "shop-angular-backend",
+  "version": "1.0.0",
+  "description": "Backend for E-commerce shopping app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nilesh Bind",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^3.22.0",
+    "typescript": "^4.8.4"
+  }
+}
