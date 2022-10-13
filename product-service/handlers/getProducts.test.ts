@@ -5,13 +5,13 @@ import { ProductService } from '../services/product-service';
 jest.mock<typeof import('../services/product-service')>('../services/product-service');
 const mockMethod = jest.fn<() => any>();
 
-const getProductByIdMock = jest
+const getProductsMock = jest
   .spyOn(ProductService.prototype, 'getProducts')
   .mockImplementation(() => {
     return mockMethod();
   }); 
 
-describe('getProductById', () => {     
+describe('getProducts', () => {     
     test('Should return empty array when there is no data', async () => {
         mockMethod.mockReturnValue(null);
         const data = await getProducts();
@@ -26,7 +26,7 @@ describe('getProductById', () => {
                 "statusCode": 200,
             }
         );
-        expect(getProductByIdMock).toHaveBeenCalled();
+        expect(getProductsMock).toHaveBeenCalled();
     })
 
     test('Should return correct data for productid from getProdutById', async () => {
