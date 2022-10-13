@@ -1,8 +1,9 @@
+import { STATUS_CODE } from ".";
 import products from "./productList.json";
 
 export class IProductService {
-    getProducts: () => Promise<any[]>;
-    getProductById: (id: string) => Promise<any>
+    getProducts!: () => Promise<any[]>;
+    getProductById!: (id: string) => Promise<any>;
 }
 
 export class ProductService implements IProductService {
@@ -12,7 +13,21 @@ export class ProductService implements IProductService {
     }
 
     getProductById(id: string) {
-        const product = products.find((item) => item?.id === id);
-        return Promise.resolve(product);
+        try {
+            const product = products.find((item) => item?.id === id);
+            if (!product) {
+                return Promise.reject({
+                    message: 'Product Not found',
+                    errorCode: STATUS_CODE.NOT_FOUND
+                })
+            }
+            return Promise.resolve(product);
+        } catch(err) {
+            const error = {
+                message: 'Something Went Wrong',
+                errorCode: STATUS_CODE.INTERNAL_ERROR
+            }
+            return Promise.reject(error);
+        }
     }
 }

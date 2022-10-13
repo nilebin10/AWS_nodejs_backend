@@ -63,6 +63,7 @@ package:
  patterns:
 #    - '!exclude-me.js'
    - '!node_modules/**'
+   - '!*/**/*.test.ts'
 #    - include-me.js
 #    - include-me-dir/**
 

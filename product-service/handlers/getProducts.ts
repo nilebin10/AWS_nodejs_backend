@@ -1,21 +1,14 @@
-import { Context, Callback } from 'aws-lambda';
-import { ProductService } from '../services';
+import { ProductService, createResponse, STATUS_CODE } from '../services';
 
 const productService = new ProductService();
-export async function getProducts(event: any, context: Context, callback: Callback) {
+export async function getProducts() {
 
-  const data = await productService.getProducts();
-  const response = {
-    statusCode: 200,
-    headers: {
-        'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify(
-        [...data]
-    ),
-  };
-  
-  return response;
+  try {
+    const data = await productService.getProducts() || [];
+    const response = createResponse(data, false, STATUS_CODE.SUCCESS);
+    return response
+  } catch(err: any) {
+    const response = createResponse(err, true, err.errCode ?? STATUS_CODE.INTERNAL_ERROR);
+    return response
+  }
 }
