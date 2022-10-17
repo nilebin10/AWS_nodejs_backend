@@ -10,15 +10,20 @@ export type Response = {
     body: string,
 }
 
+export type ErrorObject = {
+    message: String,
+    errorCode: Omit<STATUS_CODE, 'SUCCESS'>
+}
+
 export function createResponse(
-    data: Record<string, any> | null | any[], 
+    data: Record<string, any> | ErrorObject | null | any[], 
     isError: boolean, 
     statusCode: STATUS_CODE,
     message?: string): Response {
     if(isError) {
         return {
             statusCode: statusCode,
-            body: JSON.stringify({ err: data, message: message ?? 'Unexpected error occured' }),
+            body: JSON.stringify({ err: data, message: (data as ErrorObject)?.message ?? message ?? 'Unexpected error occured' }),
             headers: {...getHeaders()}
         }
     }

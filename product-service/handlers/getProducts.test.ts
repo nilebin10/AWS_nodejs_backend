@@ -29,7 +29,7 @@ describe('getProducts', () => {
         expect(getProductsMock).toHaveBeenCalled();
     })
 
-    test('Should return correct data for productid from getProdutById', async () => {
+    test('Should return correct data for when data is available', async () => {
         mockMethod.mockReturnValue([{ name: 'abc' }, { name: 'abc2' } ]);
         const data = await getProducts();
         expect(data).toEqual(

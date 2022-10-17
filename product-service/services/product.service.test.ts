@@ -14,7 +14,7 @@ describe('ProductService', () => {
         expect(data).toEqual(products);
     })
 
-    test('Should return error object for wrong productid from getProdutById', async () => {
+    test('Should return error object for wrong productid from getProductById', async () => {
         try {
             await productService.getProductById('123');
         } catch(err) {
@@ -25,7 +25,7 @@ describe('ProductService', () => {
         }
     })
 
-    test('Should return correct data for productid from getProdutById', async () => {
+    test('Should return correct data for productid from getProductById', async () => {
         const data = await productService.getProductById('7567ec4b-b10c-48c5-9345-fc73c48a80a0');
         expect(data).toEqual(
             {
