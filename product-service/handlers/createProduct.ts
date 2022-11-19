@@ -2,11 +2,12 @@ import { ProductService, createResponse, STATUS_CODE } from '../services';
 import { winstonLogger } from '../services/logger';
 
 const productService = new ProductService();
-export async function getProducts() {
+export async function createProduct(event: any) {
 
   try {
-        winstonLogger.logRequest(`GET_PRODUCT_BY_ID:: Request for products`);
-    const data = await productService.getProducts() || [];
+    const { body } = event;
+    winstonLogger.logRequest(`CREATE_PRODUCT:: Request with ${JSON.stringify(body)}`);
+    const data = await productService.createProduct(body);
     const response = createResponse(data, false, STATUS_CODE.SUCCESS);
     return response
   } catch(err: any) {
