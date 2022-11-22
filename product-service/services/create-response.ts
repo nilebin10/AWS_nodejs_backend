@@ -1,7 +1,8 @@
 export enum STATUS_CODE {
     NOT_FOUND = 404,
     INTERNAL_ERROR = 501,
-    SUCCESS = 200
+    SUCCESS = 200,
+    BAD_REQUEST = 400
 }
 
 export type Response = {
